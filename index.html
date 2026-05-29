@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IgorOS — Sistema Operacional Pessoal</title>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="js/supabase.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo-mark">iO</div>
+      <div>
+        <div class="auth-title">IgorOS</div>
+        <div class="auth-sub">Sistema Operacional Pessoal</div>
+      </div>
+    </div>
+    <div id="auth-error" class="auth-error hidden"></div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" id="auth-email" placeholder="seu@email.com" autocomplete="email"/>
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <button id="btn-login" class="btn-primary" onclick="handleLogin()">Entrar</button>
+    <button id="btn-signup" class="btn-ghost" onclick="handleSignup()">Criar conta gratuita</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="app hidden">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark sm">iO</div>
+      <span class="logo-text">IgorOS</span>
+      <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+        <span class="nav-icon">⚡</span><span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="agenda" onclick="navigate('agenda')">
+        <span class="nav-icon">📅</span><span>Agenda</span>
+      </a>
+      <a href="#" class="nav-item" data-page="tasks" onclick="navigate('tasks')">
+        <span class="nav-icon">✅</span><span>Tarefas</span>
+      </a>
+      <a href="#" class="nav-item" data-page="finance" onclick="navigate('finance')">
+        <span class="nav-icon">💰</span><span>Financeiro</span>
+      </a>
+      <a href="#" class="nav-item" data-page="projects" onclick="navigate('projects')">
+        <span class="nav-icon">🎬</span><span>Projetos</span>
+      </a>
+      <a href="#" class="nav-item" data-page="clients" onclick="navigate('clients')">
+        <span class="nav-icon">👥</span><span>Clientes</span>
+      </a>
+      <a href="#" class="nav-item" data-page="goals" onclick="navigate('goals')">
+        <span class="nav-icon">🎯</span><span>Metas</span>
+      </a>
+      <a href="#" class="nav-item" data-page="notes" onclick="navigate('notes')">
+        <span class="nav-icon">📝</span><span>Notas</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sync-status" id="sync-status">
+        <span class="sync-dot"></span>
+        <span id="sync-label">Sincronizado</span>
+      </div>
+      <button class="btn-logout" onclick="handleLogout()">Sair</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <header class="topbar">
+      <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      <div id="page-title" class="page-title">Dashboard</div>
+      <div class="topbar-actions">
+        <button class="btn-icon" onclick="openQuickAdd()" title="Adicionar rápido">＋</button>
+        <div class="user-avatar" id="user-avatar">I</div>
+      </div>
+    </header>
+
+    <div class="page-content" id="page-content">
+      <!-- Conteúdo dinâmico -->
+    </div>
+  </main>
+</div>
+
+<!-- MODAL UNIVERSAL -->
+<div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 id="modal-title">Modal</h2>
+      <button onclick="closeModal()" class="modal-close">✕</button>
+    </div>
+    <div id="modal-body" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast hidden"></div>
+
+</body>
+</html>
